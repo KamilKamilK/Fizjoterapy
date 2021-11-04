@@ -24,7 +24,7 @@ class FizjoController extends AbstractController
      */
     public function index()
     {
-        $html = $this->twig->render('index.html.twig');
+        $html = $this->twig->render('base.html.twig');
 
         return new Response($html);
     }
