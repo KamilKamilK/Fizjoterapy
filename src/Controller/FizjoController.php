@@ -39,6 +39,7 @@ class FizjoController extends AbstractController
         return new Response($html);
     }
 
+    //TO DO nie działą redirect. Czemu?
     /**
      * @Route ("/procedure", name="procedure")
      */
