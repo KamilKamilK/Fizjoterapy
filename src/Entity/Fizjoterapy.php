@@ -76,4 +76,12 @@ class Fizjoterapy
     {
         return $this->time;
     }
+
+    /**
+     * @return mixed
+     */
+    public function setTime($time): void
+    {
+        $this->time = $time;
+    }
 }
