@@ -35,7 +35,7 @@ class FizjoController extends AbstractController
      */
     public function index(): Response
     {
-        $html = $this->twig->render('fizjoterapy/index.html.twig');
+        $html = $this->twig->render('front_page/index.html.twig');
         return new Response($html);
     }
 
@@ -45,9 +45,19 @@ class FizjoController extends AbstractController
      */
     public function procedure() : Response
     {
-        $html = $this->twig->render('fizjoterapy/index.html.twig',[
+        $html = $this->twig->render('fizjoterapy/procedure.html.twig',[
             'methods' => $this->fizjoterapyRepository->findAll()
         ]);
         return new Response($html);
+    }
+
+    /**
+     * @Route ("/add", name="add_procedure")
+     */
+    public function add()
+    {
+        return new Response(
+          $this->twig->render('fizjoterapy/add.procedure.html.twig')
+        );
     }
 }
