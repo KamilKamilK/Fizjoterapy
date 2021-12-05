@@ -35,29 +35,68 @@ class FizjoController extends AbstractController
      */
     public function index(): Response
     {
-        $html = $this->twig->render('front_page/index.html.twig');
+        $html = $this->twig->render('public/index.html.twig');
         return new Response($html);
     }
 
-    //TO DO nie działą redirect. Czemu?
     /**
-     * @Route ("/procedure", name="procedure")
+     * @Route ("/procedures", name="procedures")
      */
     public function procedure() : Response
     {
-        $html = $this->twig->render('fizjoterapy/procedure.html.twig',[
+        $html = $this->twig->render('public/procedures.html.twig',[
             'methods' => $this->fizjoterapyRepository->findAll()
         ]);
         return new Response($html);
     }
 
     /**
-     * @Route ("/add", name="add_procedure")
+     * @Route ("/adm/index", name="admin_index")
+     */
+    public function adminIndex(): Response
+    {
+        return new Response(
+            $this->twig->render('admin/index.html.twig')
+        );
+    }
+
+    /**
+     * @Route ("/admin/add_procedure", name="add_procedure")
      */
     public function add()
     {
         return new Response(
-          $this->twig->render('fizjoterapy/add.procedure.html.twig')
+            $this->twig->render('admin/procedures/add.html.twig')
+        );
+    }
+
+    /**
+     * @Route ("/admin/edit", name="edit_procedure")
+     */
+    public function edit()
+    {
+        return new Response(
+            $this->twig->render('admin/procedures/edit.html.twig')
+        );
+    }
+
+    /**
+     * @Route ("/admin/update", name="update_procedure")
+     */
+    public function update()
+    {
+        return new Response(
+            $this->twig->render('admin/procedures/update.html.twig')
+        );
+    }
+
+    /**
+     * @Route ("/admin/delete", name="delete_procedure")
+     */
+    public function delete()
+    {
+        $this->redirect(
+            $this->twig->render('admin/index.html.twig')
         );
     }
 }
