@@ -18,17 +18,22 @@ class Fizjoterapy
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(name="Nazwa", type="string", length=255)
      */
-    private $header;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=280)
+     * @ORM\Column(name="Opis", type="string", length=500)
      */
     private $text;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="Typ", type="string", columnDefinition="enum('medyczna', 'społeczna')")
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(name="Data", type="datetime")
      */
     private $time;
 
@@ -40,17 +45,17 @@ class Fizjoterapy
     /**
      * @return string
      */
-    public function getHeader(): string
+    public function getName(): string
     {
-        return $this->header;
+        return $this->name;
     }
 
     /**
-     * @param mixed $header
+     * @param mixed $name
      */
-    public function setHeader($header): void
+    public function setHeader($name): void
     {
-        $this->header = $header;
+        $this->name = $name;
     }
 
     /**
@@ -83,5 +88,21 @@ class Fizjoterapy
     public function setTime($time): void
     {
         $this->time = $time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 }
