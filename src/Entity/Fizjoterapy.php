@@ -28,7 +28,7 @@ class Fizjoterapy
     private $text;
 
     /**
-     * @ORM\Column(name="Typ", type="string", columnDefinition="enum('medyczna', 'społeczna')")
+     * @ORM\Column(name="Typ", type="string", columnDefinition="enum('fizykoterapia', 'kinezyterapia', 'masaż')")
      */
     private $type;
 
