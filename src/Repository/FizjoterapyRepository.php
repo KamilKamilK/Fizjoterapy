@@ -19,6 +19,23 @@ class FizjoterapyRepository extends ServiceEntityRepository
         parent::__construct($registry, Fizjoterapy::class);
     }
 
+     /**
+      * Repository method for finding the newest inserted
+      * entry inside the database. Will return the latest
+      * entry when one is existent, otherwise will return
+      * null.
+      */
+
+    public function findLastInserted()
+    {
+        return $this
+            ->createQueryBuilder("e")
+            ->orderBy("id", "DESC")
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Fizjoterapy[] Returns an array of Fizjoterapy objects
     //  */
