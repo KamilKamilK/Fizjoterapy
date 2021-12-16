@@ -1,0 +1,12 @@
+{% block body %}
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.text) }}
+            {{ form_row(form.type) }}
+            {{ form_row(form.submit, { 'label': 'Utworz metode' }) }}
+
+            {{ form_end(form) }}
+
+{% endblock %}
