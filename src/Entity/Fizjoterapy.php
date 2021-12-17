@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FizjoterapyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FizjoterapyRepository::class)
@@ -19,16 +20,19 @@ class Fizjoterapy
 
     /**
      * @ORM\Column(name="Nazwa", type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $name;
+    public $name;
 
     /**
      * @ORM\Column(name="Opis", type="string", length=500)
+     * @Assert\NotBlank()
      */
     private $text;
 
     /**
      * @ORM\Column(name="Typ", type="string", columnDefinition="enum('fizykoterapia', 'kinezyterapia', 'masaż')")
+     * @Assert\NotBlank()
      */
     private $type;
 

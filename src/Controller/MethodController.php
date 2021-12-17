@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Fizjoterapy;
 use App\Form\MethodsType;
 use App\Repository\FizjoterapyRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 
@@ -30,16 +33,30 @@ class MethodController extends AbstractController
      */
     private $formFactory;
 
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
     public function __construct(
         Environment $twig,
         FizjoterapyRepository $fizjoRepository,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        EntityManagerInterface $entityManager,
+        RouterInterface $router
     )
 
     {
         $this->twig = $twig;
         $this->fizjoRepository = $fizjoRepository;
         $this->formFactory = $formFactory;
+        $this->entityManager = $entityManager;
+        $this->router = $router;
     }
     /**
      * @Route ("/", name="index")
@@ -95,9 +112,14 @@ class MethodController extends AbstractController
         $form = $this->formFactory->create(MethodsType::class, $fizjoterapy);
         $form->handleRequest($request);
 
-//        if ($form->isSubmitted() && $form->isValid()){
-//
-//        }
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->entityManager->persist($fizjoterapy);
+            $this->entityManager->flush();
+
+            return new RedirectResponse(
+                $this->router->generate('method_index')
+            );
+        }
         return new Response(
             $this->twig->render('admin/methods/add.html.twig',
             ['form' => $form->createView()])
