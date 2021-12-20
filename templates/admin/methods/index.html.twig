@@ -1,21 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block navigation %}
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="{{ path('index') }}">MK</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ path('admin_index') }}">Cofnij</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+   {{ include('admin/methods/rawNavigation.html.twig') }}
 {% endblock %}
 {% block header %}
 
@@ -25,9 +10,9 @@
                 <div class="text-center">
                     <h1 class="mx-auto  text-uppercase">Spis metod </h1>
                     <div class="btn-group" style="width:100%">
-                        <button class="btn btn-primary" style="width:33.3%">Fizykoterapia</button>
-                        <button class="btn btn-primary" style="width:33.3%">Kinezyterapia</button>
-                        <button class="btn btn-primary" style="width:33.3%">Masaż</button>
+                        <button class="btn btn-primary" style="width:33.3%" >Fizykoterapia</button>
+                        <button class="btn btn-primary" style="width:33.3%" >Kinezyterapia</button>
+                        <button class="btn btn-primary" style="width:33.3%" >Masaż</button>
                     </div>
 {#                    <a class="btn btn-primary" href="{{ path('method_index') }}">Fizykoterapia</a>#}
 {#                    <a class="btn btn-primary" href="{{ path('method_index') }}">Kinezyterapia</a>#}
@@ -40,31 +25,12 @@
 
 {% block body %}
 <section class="projects-section bg-light" id="projects">
-{#    <div class="container px-4 px-lg-5">#}
     <a href="{{ path('add_method') }}" class="btn btn-outline-info justify-content-center" style="width:100%">Dodaj nową metodę</a>
     {% for method in methods %}
-        <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-            <div class="col-lg-3"><img class="img-fluid" src="{{ asset('../assets/img/demo-image-01.jpg') }}" alt="..."/></div>
-
-            <div class="col-lg-3">
-                <div class="bg-black text-center h-100 project">
-                    <div class="d-flex h-100">
-                        <div class="project-text w-100 my-auto text-center text-lg-left">
-                            <h4 class="text-white">{{ method.name }}</h4>
-                            <p class="mb-0 text-white-50">{{ method.text }}</p>
-                            <hr class="d-none d-lg-block mb-0 ms-0"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 btn-group">
-                <button>Edytuj</button>
-                <button>Popraw</button>
-                <button>Usuń</button>
-            </div>
-        </div>
+        <a href="{{ path('edit_method', {'id' : method.id}) }}">
+        {{ include('admin/methods/oneMethodBox.html.twig', {'method': method} ) }}
+        </a>
     {% endfor %}
-{#    </div>#}
 </section>
 {% endblock %}
 

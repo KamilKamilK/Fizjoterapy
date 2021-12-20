@@ -36,6 +36,47 @@ class FizjoterapyRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findFizicalMethods()
+    {
+        return $this
+            ->createQueryBuilder("e")
+            ->orderBy("e.name", "ASC")
+            ->where('e.type = :typ')
+            ->setParameter(':typ', 'fizykoterapia')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findKinezyMethods()
+    {
+        return $this
+            ->createQueryBuilder("e")
+            ->orderBy("e.name", "ASC")
+            ->where('e.type = :typ')
+            ->setParameter(':typ', 'kinezyterapia')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findMasages()
+    {
+        return $this
+            ->createQueryBuilder("e")
+            ->orderBy("e.name", "ASC")
+            ->where('e.type = :typ')
+            ->setParameter(':typ', 'masaz')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllMethodsDESC()
+    {
+        return $this
+            ->createQueryBuilder("e")
+            ->orderBy("e.id", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Fizjoterapy[] Returns an array of Fizjoterapy objects
     //  */
