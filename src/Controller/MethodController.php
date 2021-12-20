@@ -44,11 +44,11 @@ class MethodController extends AbstractController
     private $router;
 
     public function __construct(
-        Environment $twig,
-        FizjoterapyRepository $fizjoRepository,
-        FormFactoryInterface $formFactory,
+        Environment            $twig,
+        FizjoterapyRepository  $fizjoRepository,
+        FormFactoryInterface   $formFactory,
         EntityManagerInterface $entityManager,
-        RouterInterface $router
+        RouterInterface        $router
     )
 
     {
@@ -58,6 +58,7 @@ class MethodController extends AbstractController
         $this->entityManager = $entityManager;
         $this->router = $router;
     }
+
     /**
      * @Route ("/", name="index")
      */
@@ -70,11 +71,11 @@ class MethodController extends AbstractController
     /**
      * @Route ("/methods", name="methods")
      */
-    public function methods() : Response
+    public function methods(): Response
     {
 //        $newestMetod = $this->fizjoterapyRepository->findOneBy(, 'DESC');
 //        $newestMetod = $this->fizjoterapyRepository->findLastInserted();
-        $html = $this->twig->render('public/methods.html.twig',[
+        $html = $this->twig->render('public/methods.html.twig', [
             'methods' => $this->fizjoRepository->findAll()
         ]);
         return new Response($html);
@@ -89,15 +90,24 @@ class MethodController extends AbstractController
             $this->twig->render('admin/index.html.twig')
         );
     }
+
     /**
      * @Route ("/adm/methods/index", name="method_index")
      */
     public function methodsIndex(): Response
     {
-        $allMethods = $this->fizjoRepository->findAll();
+//        if (isset($_POST['fizykoterapia'])) {
+//            $methods = $this->fizjoRepository->findFizicalMethods();
+//        } elseif (isset($_POST['kinezyterapia'])) {
+//            $methods = $this->fizjoRepository->findKinezyMethods();
+//        } elseif (isset($_POST['masaz'])) {
+//            $methods = $this->fizjoRepository->findMasages();
+//        } else {
+            $methods = $this->fizjoRepository->findAllMethodsDESC();
+//        }
 
-    $html =$this->twig->render('admin/methods/index.html.twig',[
-        'methods' => $allMethods ]);
+        $html = $this->twig->render('admin/methods/index.html.twig', [
+            'methods' => $methods]);
         return new Response($html);
     }
 
@@ -112,7 +122,7 @@ class MethodController extends AbstractController
         $form = $this->formFactory->create(MethodsType::class, $fizjoterapy);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($fizjoterapy);
             $this->entityManager->flush();
 
@@ -122,17 +132,20 @@ class MethodController extends AbstractController
         }
         return new Response(
             $this->twig->render('admin/methods/add.html.twig',
-            ['form' => $form->createView()])
+                ['form' => $form->createView()])
         );
     }
 
     /**
-     * @Route ("/admin/method/edit", name="edit_method")
+     * @Route ("/admin/method/{id}", name="edit_method")
      */
-    public function edit()
+    public function edit($id)
     {
+        $method = $this->fizjoRepository->find($id);
         return new Response(
-            $this->twig->render('admin/methods/edit.html.twig')
+            $this->twig->render('admin/methods/edit.html.twig',[
+                'method' => $method
+            ])
         );
     }
 
