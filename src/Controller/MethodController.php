@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
@@ -43,12 +44,18 @@ class MethodController extends AbstractController
      */
     private $router;
 
+    /**
+     * @var FlashBagInterface
+     */
+    private $flashBag;
+
     public function __construct(
         Environment            $twig,
         FizjoterapyRepository  $fizjoRepository,
         FormFactoryInterface   $formFactory,
         EntityManagerInterface $entityManager,
-        RouterInterface        $router
+        RouterInterface        $router,
+        FlashBagInterface     $flashBag
     )
 
     {
@@ -57,6 +64,7 @@ class MethodController extends AbstractController
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
         $this->router = $router;
+        $this->flashBag = $flashBag;
     }
 
     /**
@@ -96,15 +104,7 @@ class MethodController extends AbstractController
      */
     public function methodsIndex(): Response
     {
-//        if (isset($_POST['fizykoterapia'])) {
-//            $methods = $this->fizjoRepository->findFizicalMethods();
-//        } elseif (isset($_POST['kinezyterapia'])) {
-//            $methods = $this->fizjoRepository->findKinezyMethods();
-//        } elseif (isset($_POST['masaz'])) {
-//            $methods = $this->fizjoRepository->findMasages();
-//        } else {
-            $methods = $this->fizjoRepository->findAllMethodsDESC();
-//        }
+        $methods = $this->fizjoRepository->findAllMethodsDESC();
 
         $html = $this->twig->render('admin/methods/index.html.twig', [
             'methods' => $methods]);
@@ -126,6 +126,8 @@ class MethodController extends AbstractController
             $this->entityManager->persist($fizjoterapy);
             $this->entityManager->flush();
 
+            $this->flashBag->add('notice', 'Stworzyłaś nową metodę o nazwie "' .$fizjoterapy->name .'"');
+
             return new RedirectResponse(
                 $this->router->generate('method_index')
             );
@@ -143,7 +145,7 @@ class MethodController extends AbstractController
     {
         $method = $this->fizjoRepository->find($fizjoterapy);
         return new Response(
-            $this->twig->render('admin/methods/edit.html.twig',[
+            $this->twig->render('admin/methods/edit.html.twig', [
                 'method' => $method
             ])
         );
@@ -161,6 +163,8 @@ class MethodController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
+
+            $this->flashBag->add('notice', 'Zmiany w metodzie "'. $editedMethod->name .'" zostały zapisane');
 
             return new RedirectResponse(
                 $this->router->generate('method_index')
@@ -180,6 +184,8 @@ class MethodController extends AbstractController
     {
         $this->entityManager->remove($fizjoterapy);
         $this->entityManager->flush();
+
+        $this->flashBag->add('notice', 'Metoda została usunięta');
 
         return new RedirectResponse(
             $this->router->generate('method_index')
