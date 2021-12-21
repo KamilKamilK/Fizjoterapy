@@ -4,5 +4,6 @@
     <a href="{{ path('update_method', {'id' : method.id}) }}" class="btn btn-outline-info justify-content-center" style="width:100%">Zmień zawartość metody</a>
     {{ include('admin/methods/oneMethodBox.html.twig', {'method' : method} ) }}
     <a href="{{ path('delete_method', {'id' : method.id}) }}" class="btn btn-outline-danger justify-content-center" style="width:100%">Usuń metodę</a>
+    <a href="{{ path('method_index') }}" class="btn btn-warning justify-content-center" style="width:100%">Cofnij do listy metod</a>
 
 {% endblock %}

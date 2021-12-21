@@ -11694,6 +11694,15 @@ body {
     padding: 5rem 0;
 }
 
+.usun_metode {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 /*.btn-group button {*/
 /*    background-color: #04AA6D; !* Green background *!*/
 /*    border: 1px solid green; !* Green border *!*/
