@@ -20,13 +20,13 @@ class Fizjoterapy
 
     /**
      * @ORM\Column(name="Nazwa", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Uzupełnij pole z nazwą metody")
      */
     public $name;
 
     /**
      * @ORM\Column(name="Opis", type="string", length=500)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Uzupełnij pole z opisem metody")
      */
     private $text;
 

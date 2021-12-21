@@ -21,9 +21,9 @@ class MethodsType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => 'Kategoria',
                 'choices' => [
-                    'Fizykoterapia' => 1,
-                    'Kinezyterapia' => 2,
-                    'Masaż' => 3,
+                    'Fizykoterapia' => 'fizykoterapia',
+                    'Kinezyterapia' => 'kinezyterapia',
+                    'Masaż' => 'masaż',
                 ]
             ])
             ->add('submit', SubmitType::class);

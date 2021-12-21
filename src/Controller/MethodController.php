@@ -139,9 +139,9 @@ class MethodController extends AbstractController
     /**
      * @Route ("/admin/method/{id}", name="edit_method")
      */
-    public function edit($id)
+    public function edit(Fizjoterapy $fizjoterapy)
     {
-        $method = $this->fizjoRepository->find($id);
+        $method = $this->fizjoRepository->find($fizjoterapy);
         return new Response(
             $this->twig->render('admin/methods/edit.html.twig',[
                 'method' => $method
@@ -150,22 +150,39 @@ class MethodController extends AbstractController
     }
 
     /**
-     * @Route ("/admin/method/update", name="update_method")
+     * @Route ("/admin/method/update/{id}", name="update_method")
      */
-    public function update()
+    public function update(Fizjoterapy $fizjoterapy, Request $request): Response
     {
+        $editedMethod = $this->fizjoRepository->find($fizjoterapy);
+
+        $form = $this->formFactory->create(MethodsType::class, $editedMethod);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+
+            return new RedirectResponse(
+                $this->router->generate('method_index')
+            );
+        }
         return new Response(
-            $this->twig->render('admin/methods/update.html.twig')
+            $this->twig->render('admin/methods/update.html.twig',
+                ['form' => $form->createView()])
         );
     }
 
+
     /**
-     * @Route ("/admin/method/delete", name="delete_method")
+     * @Route ("/admin/method/delete/{id}", name="delete_method")
      */
-    public function delete()
+    public function delete(Fizjoterapy $fizjoterapy)
     {
-        $this->redirect(
-            $this->twig->render('admin/methods/index.html.twig')
+        $this->entityManager->remove($fizjoterapy);
+        $this->entityManager->flush();
+
+        return new RedirectResponse(
+            $this->router->generate('method_index')
         );
     }
 }
