@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {% block navigation %}
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
@@ -18,20 +19,23 @@
     </nav>
 {% endblock %}
 
-{% block header %}
-    <div class="container  d-flex flex-column h-100  justify-content-center">
-        <h1> Zmień metodę</h1>
+{% block body %}
 
-        {{ form_start(form) }}
+    <section class="update-method-section">
+        <div class="container  d-flex flex-column h-100  justify-content-center">
+            <h1> Zmień metodę</h1>
 
-                {{ form_row(form.name) }}
+            {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
 
             {{ form_row(form.text) }}
 
-                {{ form_row(form.type) }}
+            {{ form_row(form.type) }}
 
             {{ form_row(form.submit, { 'label': 'Zapisz zmiany' }) }}
 
-        {{ form_end(form) }}
-    </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
 {% endblock %}
