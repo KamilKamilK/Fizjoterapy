@@ -11551,6 +11551,109 @@ body {
     border: 0;
 }
 
+.add-method-section {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../img/mountains.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.add-method-section label {
+    color: #64a19d;
+}
+
+.add-method-section h1 {
+    color: #64a19d;
+}
+
+.edit-method-section {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../img/white-black-mountain.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.update-method-section {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../img/forest.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.update-method-section label {
+    color: #64a19d;
+}
+
+.update-method-section h1 {
+    color: #64a19d;
+}
+
+.adminbody {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../img/park.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.adminbody h1, .adminbody .h1 {
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.8rem;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.adminbody h2, .adminbody .h2 {
+    max-width: 20rem;
+    font-size: 1rem;
+}
+@media (min-width: 768px) {
+    .adminbody h1, .adminbody .h1 {
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+}
+@media (min-width: 992px) {
+    .adminbody {
+        height: 100vh;
+        padding: 0;
+    }
+    .adminbody h1, .adminbody .h1 {
+        font-size: 6.5rem;
+        line-height: 6.5rem;
+        letter-spacing: 0.8rem;
+    }
+    .adminbody h2, .adminbody .h2 {
+        max-width: 30rem;
+        font-size: 1.25rem;
+    }
+}
 .masthead {
     position: relative;
     width: 100%;
@@ -11693,21 +11796,3 @@ body {
 .footer {
     padding: 5rem 0;
 }
-
-.usun_metode {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-/*.btn-group button {*/
-/*    background-color: #04AA6D; !* Green background *!*/
-/*    border: 1px solid green; !* Green border *!*/
-/*    color: white; !* White text *!*/
-/*    padding: 10px 24px; !* Some padding *!*/
-/*    cursor: pointer; !* Pointer/hand icon *!*/
-/*    float: left; !* Float the buttons side by side *!*/
-/*}*/
