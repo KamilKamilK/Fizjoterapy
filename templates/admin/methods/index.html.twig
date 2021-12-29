@@ -21,7 +21,7 @@
 
 {% block header %}
     {% for message in app.flashes('notice') %}
-        <H4 class="alert-success d-flex justify-content-center">
+        <H4 class="alert-black alert-success d-flex justify-content-center" style="background-color: greenyellow">
             {{ message }}
         </H4>
     {% endfor %}
@@ -42,6 +42,8 @@
             </div>
         </div>
     </header>
+
+
 {% endblock %}
 
 {% block body %}
