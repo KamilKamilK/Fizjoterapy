@@ -55,7 +55,7 @@ class MethodController extends AbstractController
         FormFactoryInterface   $formFactory,
         EntityManagerInterface $entityManager,
         RouterInterface        $router,
-        FlashBagInterface     $flashBag
+        FlashBagInterface      $flashBag
     )
 
     {
@@ -126,7 +126,7 @@ class MethodController extends AbstractController
             $this->entityManager->persist($fizjoterapy);
             $this->entityManager->flush();
 
-            $this->flashBag->add('notice', 'Stworzyłaś nową metodę o nazwie "' .$fizjoterapy->name .'"');
+            $this->flashBag->add('notice', 'Stworzyłaś nową metodę o nazwie "' . $fizjoterapy->name . '"');
 
             return new RedirectResponse(
                 $this->router->generate('method_index')
@@ -164,7 +164,7 @@ class MethodController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            $this->flashBag->add('notice', 'Zmiany w metodzie "'. $editedMethod->name .'" zostały zapisane');
+            $this->flashBag->add('notice', 'Zmiany w metodzie "' . $editedMethod->name . '" zostały zapisane');
 
             return new RedirectResponse(
                 $this->router->generate('method_index')
